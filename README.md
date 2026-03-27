@@ -1,18 +1,18 @@
-BorderFix
+# BorderFix
 World border enforcement plugin for Paper/Spigot 1.21+.
 
-Structure:
+# Structure:
 core: main plugin logic handling movement interception and border enforcement
 listeners: event hooks for teleportation, projectile motion, and ability usage
 anti-exploit: violation tracking + detection for abnormal border bypass attempts
 commands: debug and admin tooling (/borderfix debug)
 config: lightweight configuration handling and defaults
 
-Why:
+# Why:
 Stupid children on Voidsent keep glitching outside of the border.
 BorderFix exists to enforce consistent border rules across all movement types without relying on heavy world manipulation or external proxies.
 
-How It Works:
+# How It Works:
 Player movement is monitored during teleportation events and projectile launches.
 
 If a movement vector would result in a position outside the world border, the action is intercepted before execution.
