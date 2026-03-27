@@ -1,0 +1,23 @@
+enabled-worlds:
+  - world
+
+blocked-message: "&cYou cannot go past the world border!"
+
+auto-correct: true
+check-interval-ticks: 20
+
+knockback:
+  enabled: true
+  strength: 1.2
+  vertical: 0.4
+
+pearl:
+  cancel-midair: true
+
+plugin-teleport:
+  block: true
+  detect-aote: true
+  aote-name: "Aspect of the End"
+
+logging:
+  enabled: true

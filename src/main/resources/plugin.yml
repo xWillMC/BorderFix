@@ -1,0 +1,15 @@
+name: BorderFix
+version: 1.2
+main: com.nobowl.borderfix.BorderFix
+api-version: "1.21"
+author: NoBowl
+
+commands:
+  borderfix:
+    description: BorderFix admin command
+    usage: /borderfix debug
+    permission: borderfix.admin
+
+permissions:
+  borderfix.admin:
+    default: op
