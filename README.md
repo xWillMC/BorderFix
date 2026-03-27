@@ -2,11 +2,11 @@
 World border enforcement plugin for Paper/Spigot 1.21+.
 
 # Structure:
-core: main plugin logic handling movement interception and border enforcement
-listeners: event hooks for teleportation, projectile motion, and ability usage
-anti-exploit: violation tracking + detection for abnormal border bypass attempts
-commands: debug and admin tooling (/borderfix debug)
-config: lightweight configuration handling and defaults
+- core: main plugin logic handling movement interception and border enforcement
+- listeners: event hooks for teleportation, projectile motion, and ability usage
+- anti-exploit: violation tracking + detection for abnormal border bypass attempts
+- commands: debug and admin tooling (/borderfix debug)
+- config: lightweight configuration handling and defaults
 
 # Why:
 Stupid children on Voidsent keep glitching outside of the border.
