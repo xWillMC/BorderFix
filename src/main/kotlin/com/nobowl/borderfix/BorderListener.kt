@@ -25,22 +25,22 @@ class BorderListener(private val plugin: BorderFix) : Listener {
 
         if (!isPearl && !isChorus && !isPlugin) return
 
-        if (isPlugin && plugin.config.getBoolean("plugin-teleport.detect-aote")) {
+        if (isPlugin && plugin.detectAote) {
             val item = player.inventory.itemInMainHand
+            val meta = item.itemMeta
 
-            if (item.hasItemMeta() && item.itemMeta!!.hasDisplayName()) {
-                val name = ChatColor.stripColor(item.itemMeta!!.displayName) ?: ""
-
-                if (name.contains(plugin.config.getString("plugin-teleport.aote-name")!!, true)) {
+            if (meta != null && meta.hasDisplayName()) {
+                val name = ChatColor.stripColor(meta.displayName) ?: ""
+                if (name.contains(plugin.aoteName, ignoreCase = true)) {
                     Util.flag(plugin, player, "AOTE_ATTEMPT")
                 }
             }
         }
 
-        if (isPlugin && !plugin.config.getBoolean("plugin-teleport.block")) return
+        if (isPlugin && !plugin.pluginTeleportBlock) return
 
         event.isCancelled = true
-        player.sendMessage(Util.msg(plugin))
+        player.sendMessage(plugin.blockedMessage)
 
         Util.flag(plugin, player, "BLOCKED")
         Util.log(plugin, "${player.name} blocked teleport ($cause)")
