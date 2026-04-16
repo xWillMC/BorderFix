@@ -7,7 +7,7 @@ class BorderTask(private val plugin: BorderFix) {
     fun start() {
         Bukkit.getScheduler().runTaskTimer(plugin, Runnable {
 
-            if (!plugin.config.getBoolean("auto-correct")) return@Runnable
+            if (!plugin.autoCorrect) return@Runnable
 
             for (player in Bukkit.getOnlinePlayers()) {
                 val world = player.world
@@ -15,16 +15,16 @@ class BorderTask(private val plugin: BorderFix) {
                 if (!Util.enabled(plugin, world)) continue
                 if (Util.inside(world, player.location)) continue
 
-                if (plugin.config.getBoolean("knockback.enabled")) {
+                if (plugin.knockbackEnabled) {
                     Util.knockback(plugin, player)
                 } else {
                     player.teleport(Util.safe(world))
                 }
 
-                player.sendMessage(Util.msg(plugin))
+                player.sendMessage(plugin.blockedMessage)
                 Util.flag(plugin, player, "OUTSIDE")
             }
 
-        }, 20L, plugin.config.getLong("check-interval-ticks"))
+        }, 20L, plugin.checkIntervalTicks)
     }
 }
