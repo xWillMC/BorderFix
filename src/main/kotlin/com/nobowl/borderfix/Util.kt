@@ -1,19 +1,13 @@
 package com.nobowl.borderfix
 
-import org.bukkit.*
+import org.bukkit.Location
+import org.bukkit.World
 import org.bukkit.entity.Player
-import org.bukkit.util.Vector
 
 object Util {
 
     fun enabled(plugin: BorderFix, world: World): Boolean {
-        return plugin.config.getStringList("enabled-worlds").contains(world.name)
-    }
-
-    fun msg(plugin: BorderFix): String {
-        return ChatColor.translateAlternateColorCodes('&',
-            plugin.config.getString("blocked-message")!!
-        )
+        return plugin.enabledWorlds.contains(world.name)
     }
 
     fun inside(world: World, loc: Location): Boolean {
@@ -35,22 +29,18 @@ object Util {
         val c = player.world.worldBorder.center
         val dir = c.toVector().subtract(player.location.toVector()).normalize()
 
-        val strength = plugin.config.getDouble("knockback.strength")
-        val y = plugin.config.getDouble("knockback.vertical")
-
-        val vec = dir.multiply(strength)
-        vec.y = y
+        val vec = dir.multiply(plugin.knockbackStrength)
+        vec.y = plugin.knockbackVertical
 
         player.velocity = vec
     }
 
     fun flag(plugin: BorderFix, player: Player, type: String) {
-        val stats = plugin.stats.computeIfAbsent(player.uniqueId) { PlayerStats() }
-        stats.add(type)
+        plugin.stats.computeIfAbsent(player.uniqueId) { PlayerStats() }.add(type)
     }
 
     fun log(plugin: BorderFix, msg: String) {
-        if (plugin.config.getBoolean("logging.enabled")) {
+        if (plugin.loggingEnabled) {
             plugin.logger.info("[BorderFix] $msg")
         }
     }
