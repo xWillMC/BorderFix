@@ -2,21 +2,24 @@ package com.nobowl.borderfix
 
 class PlayerStats {
 
-    private var blocked = 0
-    private var pearl = 0
-    private var outside = 0
-    private var aote = 0
+    var blocked = 0
+        private set
+    var pearl = 0
+        private set
+    var outside = 0
+        private set
+    var aote = 0
+        private set
 
     fun add(type: String) {
         when (type) {
             "BLOCKED" -> blocked++
-            "PEARL" -> pearl++
+            "PEARL"   -> pearl++
             "OUTSIDE" -> outside++
             "AOTE_ATTEMPT" -> aote++
         }
     }
 
-    fun summary(): String {
-        return "Blocked:$blocked Pearl:$pearl Outside:$outside AOTE:$aote"
-    }
+    fun summary(): String =
+        "Blocked:$blocked Pearl:$pearl Outside:$outside AOTE:$aote"
 }
